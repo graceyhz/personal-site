@@ -1,0 +1,18 @@
+export const meta = {
+  title: "canto-mando",
+  category: "project",
+  period: "Jul – Aug 2026",
+  blurb: "Teaches Cantonese to Mandarin speakers by drilling only the differences, with spaced repetition and speech scoring.",
+  stack: ["Next.js", "TypeScript", "Supabase", "Azure Speech", "FSRS", "Claude API"],
+  outcome:
+    "A working app with placement calibration, per-skill spaced repetition, listen and speak drills, module tests, and a content pipeline that generates example sentences and native audio.",
+  links: {
+    repo: "https://github.com/graceyhz/canto-mando",
+  },
+};
+
+Cantonese and Mandarin share a writing system and diverge sharply in sound and function words. Most courses ignore that and teach Cantonese from zero. This one teaches the deltas: if you can already read a character, it doesn't quiz you on reading it, only on how it sounds and where the grammar differs.
+
+A placement diagnostic seeds what you already know per skill, so listening, speaking, and reading are tracked separately for every concept. Reviews are scheduled with FSRS, and speaking practice records you and scores it with Azure Pronunciation Assessment, falling back to record-and-compare against native audio when automated scoring isn't available.
+
+Content is authored in a markdown file, seeded into Supabase, and backfilled with example sentences from the Claude API and pre-generated TTS audio in Azure Blob Storage.

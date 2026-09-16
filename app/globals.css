@@ -98,3 +98,32 @@ h3 {
     scroll-behavior: auto !important;
   }
 }
+
+/* Minimal long-form styles for MDX project bodies (§8.2: 68ch, 1.6). */
+.prose > * + * {
+  margin-top: 1.25em;
+}
+.prose a {
+  color: var(--accent-text);
+  text-underline-offset: 4px;
+}
+.prose a:hover {
+  text-decoration: underline;
+}
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--surface);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-chip);
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.25em;
+}
+.prose ul {
+  list-style: disc;
+}
+.prose ol {
+  list-style: decimal;
+}

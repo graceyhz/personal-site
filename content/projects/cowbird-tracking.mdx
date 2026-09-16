@@ -1,0 +1,17 @@
+export const meta = {
+  title: "Automating Brown-headed Cowbird Identification and Multi-Camera 3D Tracking in a Smart Aviary",
+  category: "research",
+  org: "Computational Neuroethology Lab, Penn",
+  period: "Jun 2026 – present",
+  blurb: "Detection, tracking, and color-band re-ID so the lab can follow individual birds across hours of footage.",
+  stack: ["Python", "PyTorch", "YOLOv8", "BoT-SORT", "DeepLabCut", "OpenCV"],
+  outcome:
+    "The detector holds 0.87 mAP@50, and band-color re-identification went from 44.6% to 70.3% across seven classes and ten feeds. Supported by a PURM award.",
+  featured: true,
+};
+
+The lab studies social behavior in brown-headed cowbirds, which means hours of aviary footage with a dozen near-identical birds in it. The question I'm working on is simple to state and annoying to solve: which bird is which, frame to frame, for a whole recording.
+
+The pipeline is a fine-tuned YOLOv8 detector feeding BoT-SORT for persistent track IDs. Tracks break whenever birds occlude each other, so identity has to be recovered from the colored leg bands. That re-ID step uses DeepLabCut keypoints to find the legs, CIELAB color features from the band region, and a QDA classifier that only commits when it's confident. The confidence filter was the piece that moved accuracy the most.
+
+Next up is closing the loop on track fragments so a bird's identity survives a long occlusion instead of getting reassigned when it reappears.

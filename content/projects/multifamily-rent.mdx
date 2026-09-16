@@ -1,0 +1,19 @@
+export const meta = {
+  title: "Assessing the impact of maintenance condition on multifamily rents: an integrated approach of machine learning and hedonic modelling",
+  category: "research",
+  org: "Urban AI Lab, Texas A&M",
+  period: "Jun – Sep 2023",
+  blurb: "Hedonic and multilevel rent models over 541 complexes, with a Green View Index computed from Street View.",
+  stack: ["R", "Python", "OpenCV", "Random Forest", "Hedonic modeling"],
+  outcome:
+    "Models reached R² of 0.80. Indoor maintenance violations and outdoor greenery both came out as significant rent predictors. The work became a second-author paper in the Journal of Housing and the Built Environment.",
+  links: {
+    paper: "https://doi.org/10.1007/s10901-025-10202-4",
+  },
+};
+
+The lab wanted to know how much a building's physical condition, inside and out, actually shows up in rent. Survey and census data covered the indoor side. The outdoor side had no dataset, so I built one.
+
+For each complex I pulled Google Street View at four angles and ran Otsu thresholding in OpenCV to estimate the fraction of each view that was vegetation, averaged into a Green View Index. Joining that with survey violation records and census covariates produced a 53,111-unit dataset across 541 multifamily complexes, from just over a million raw records.
+
+The modeling side was hedonic regression and multilevel random-coefficient models in R, with a Random Forest for feature importance. Greenery ranked seventh of seventeen rent determinants, which was higher than any of us expected for a variable computed from street photos.

@@ -1,0 +1,13 @@
+export const meta = {
+  title: "Software Engineer Intern @ ElevatEd School",
+  category: "work",
+  org: "ElevatEd School",
+  period: "Feb – May 2026",
+  blurb: "Stripe ingestion and SQL analytics behind the manager dashboard.",
+  stack: ["JavaScript", "SQL", "Stripe API"],
+  outcome:
+    "Full-year data loads run 55% faster and match source revenue at roughly 95%. The dashboard gained lifetime-value tracking, top-spender segments, and inactive-student detection.",
+  featured: true,
+};
+
+The school's dashboard pulled a year of Stripe data serially and disagreed with the books. I rewrote the ingestion as parallel monthly chunks with cross-account deduplication, then wrote the transforms that reconcile payment timing so the numbers reflect cash flow rather than invoice dates.
