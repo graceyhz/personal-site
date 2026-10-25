@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 };
 
 const sections = [
-  { href: "/arts/visual", label: "visual", blurb: "Drawing, illustration & photography." },
-  { href: "/arts/performing", label: "performing", blurb: "Dance, in photos and on video." },
+  { href: "/arts/visual", label: "visual", blurb: "drawing, illustration & photography." },
+  { href: "/arts/performing", label: "performing", blurb: "dance, in photos and on video." },
 ] as const;
 
 export default function ArtsPage() {
