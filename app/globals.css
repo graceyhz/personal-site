@@ -13,6 +13,7 @@
   --support: #2f5d50;
   --pen: #2340c9;
   --dot: #b9c8d5;
+  --frame: #ffffff;
 }
 
 @theme inline {
@@ -25,6 +26,7 @@
   --color-accent-text: var(--accent-text);
   --color-support: var(--support);
   --color-pen: var(--pen);
+  --color-frame: var(--frame);
 
   --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;

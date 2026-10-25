@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/container";
 import { Gallery } from "@/components/gallery";
 import { PageHeader } from "@/components/page-header";
+import { Tape } from "@/components/polaroid";
 import { SectionHeading } from "@/components/section-heading";
 import { VideoFacade } from "@/components/video-facade";
 import type { PerformingEntry } from "@/content/arts";
@@ -18,10 +19,14 @@ const videoSections = [
   { kind: "danced", heading: "check out some of the dances i’ve performed in!" },
 ] as const;
 
-function Video({ p }: { p: PerformingEntry }) {
+function Video({ p, index }: { p: PerformingEntry; index: number }) {
   return (
     <li className="min-w-0">
-      <VideoFacade youtubeId={p.youtubeId} title={p.title} alt={p.alt} />
+      {/* Taped like the photos, but no tilt: a tilted player looks broken */}
+      <div className="relative bg-frame p-2.5 shadow-[0_2px_8px_rgba(27,37,51,0.16)]">
+        <Tape index={index} />
+        <VideoFacade youtubeId={p.youtubeId} title={p.title} alt={p.alt} />
+      </div>
       <h3 className="mt-4 text-lg">{p.title}</h3>
       <p className="font-mono text-xs text-ink-muted">
         {[p.medium, p.year].filter(Boolean).join(" · ")}
@@ -53,8 +58,8 @@ export default function PerformingArtsPage() {
           <section key={kind} className="mt-16" aria-labelledby={`videos-${kind}`}>
             <SectionHeading id={`videos-${kind}`} title={heading} />
             <ul className="grid gap-12 md:grid-cols-2">
-              {videos.map((p) => (
-                <Video key={p.youtubeId} p={p} />
+              {videos.map((p, i) => (
+                <Video key={p.youtubeId} p={p} index={i} />
               ))}
             </ul>
           </section>

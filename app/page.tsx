@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/container";
+import { Polaroid, Tape } from "@/components/polaroid";
 import { SectionHeading } from "@/components/section-heading";
 import { VideoFacade } from "@/components/video-facade";
 import type { Project } from "@/content/schema";
@@ -178,27 +179,31 @@ export default async function Home() {
             href="/arts"
             linkLabel="see all arts"
           />
-          <ul className="flex flex-wrap items-start gap-8">
+          <ul className="flex flex-wrap items-start gap-8 pt-3">
             {artTiles.map((v, i) => (
               <li key={v.src} className={`min-w-0 flex-[1_1_220px] sm:max-w-xs ${i === 1 ? "sm:mt-12" : ""}`}>
-                <Link href={v.href} className="block border-[1.5px] border-ink">
-                  <Image
-                    src={v.src}
-                    alt={v.alt}
-                    width={v.width}
-                    height={v.height}
-                    sizes="(min-width: 768px) 25vw, 100vw"
-                    className="h-auto w-full"
-                  />
+                <Link href={v.href} className="group block">
+                  <Polaroid
+                    index={i}
+                    caption={[v.title, v.medium.toLowerCase(), v.year].filter(Boolean).join(", ")}
+                  >
+                    <Image
+                      src={v.src}
+                      alt={v.alt}
+                      width={v.width}
+                      height={v.height}
+                      sizes="(min-width: 768px) 25vw, 100vw"
+                      className="h-auto w-full"
+                    />
+                  </Polaroid>
                 </Link>
-                <p className="mt-2 font-hand text-xl text-pen">
-                  {[v.title, v.medium.toLowerCase(), v.year].filter(Boolean).join(", ")}
-                </p>
               </li>
             ))}
             {performance && (
               <li className="min-w-0 flex-[2_1_400px]">
-                <div className="border-[1.5px] border-ink">
+                {/* Videos get tape but no tilt: a tilted player looks broken */}
+                <div className="relative bg-frame p-2.5 shadow-[0_2px_8px_rgba(27,37,51,0.16)]">
+                  <Tape index={artTiles.length} />
                   <VideoFacade
                     youtubeId={performance.youtubeId}
                     title={performance.title}

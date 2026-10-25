@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { Polaroid } from "@/components/polaroid";
 import type { PhotoPiece } from "@/lib/arts";
 
 /* FR-09: responsive grid → lightbox. The native <dialog> handles the focus
@@ -36,28 +37,29 @@ export function Gallery({
 
   return (
     <>
-      <ul className={`${columns} gap-4 [&>li]:mb-4 [&>li]:break-inside-avoid`}>
+      <ul className={`${columns} gap-6 pt-3 [&>li]:mb-9 [&>li]:break-inside-avoid`}>
         {pieces.map((p, i) => (
           <li key={p.src}>
             <button
               type="button"
               onClick={() => setIndex(i)}
               aria-label={`Open ${p.title}`}
-              className="block w-full transition-opacity duration-150 hover:opacity-90"
+              className="group block w-full"
             >
-              <Image
-                src={p.src}
-                alt={p.alt}
-                width={p.width}
-                height={p.height}
-                sizes="(min-width: 768px) 33vw, 50vw"
-                className="h-auto w-full"
-              />
+              <Polaroid
+                index={i}
+                caption={`${p.title}${p.year ? ` · ${p.year}` : ""}`}
+              >
+                <Image
+                  src={p.src}
+                  alt={p.alt}
+                  width={p.width}
+                  height={p.height}
+                  sizes="(min-width: 768px) 33vw, 50vw"
+                  className="h-auto w-full"
+                />
+              </Polaroid>
             </button>
-            <p className="mt-1 font-hand text-xl text-pen">
-              {p.title}
-              {p.year ? ` · ${p.year}` : ""}
-            </p>
           </li>
         ))}
       </ul>
