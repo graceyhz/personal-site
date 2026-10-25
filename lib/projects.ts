@@ -25,8 +25,23 @@ export const getProject = cache(async (slug: string): Promise<Project> => {
   return { slug, ...parsed.data };
 });
 
+const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+/* Sort key from the end of `period` ("Feb – May 2026", "Jun 2026 – present"):
+   ongoing entries first, then by the last month and year mentioned. */
+function periodEnd(period: string): number {
+  if (/present/i.test(period)) return Infinity;
+  const year = Number(period.match(/\d{4}(?!.*\d{4})/)?.[0] ?? 0);
+  const months = (period.toLowerCase().match(/[a-z]{3}/g) ?? [])
+    .map((w) => MONTHS.indexOf(w))
+    .filter((m) => m >= 0);
+  return year * 12 + (months.at(-1) ?? 0);
+}
+
+/* Newest first */
 export const getProjects = cache(async (): Promise<Project[]> => {
-  return Promise.all(projectSlugs().map(getProject));
+  const projects = await Promise.all(projectSlugs().map(getProject));
+  return projects.sort((a, b) => periodEnd(b.period) - periodEnd(a.period));
 });
 
 export async function getProjectBody(slug: string) {

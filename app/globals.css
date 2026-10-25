@@ -11,6 +11,8 @@
   --accent: #c2542f;
   --accent-text: #a8431f;
   --support: #2f5d50;
+  --pen: #2340c9;
+  --dot: #ddd5ca;
 }
 
 @theme inline {
@@ -22,10 +24,12 @@
   --color-accent: var(--accent);
   --color-accent-text: var(--accent-text);
   --color-support: var(--support);
+  --color-pen: var(--pen);
 
   --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-hand: var(--font-caveat), cursive;
 
   /* §8.2 scale (1.25) */
   --text-xs: 0.75rem;
@@ -68,6 +72,12 @@ h3 {
 
 ::selection {
   background: var(--surface);
+}
+
+/* Sketchbook homepage: dot-grid paper */
+.dot-paper {
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* §8.5 entrance motion, opt-in via .fade-up; only runs when motion is allowed */

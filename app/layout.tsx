@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Poppins } from "next/font/google";
+import { Caveat, Inter, JetBrains_Mono, Poppins } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { site } from "@/lib/site";
@@ -26,6 +26,14 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+/* Handwritten margin notes on the sketchbook homepage */
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["500"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -47,7 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${inter.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${poppins.variable} ${inter.variable} ${jetbrainsMono.variable} ${caveat.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-paper text-ink">
         <Header />
