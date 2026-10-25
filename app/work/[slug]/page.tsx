@@ -5,12 +5,13 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/container";
 import { ProjectLinks } from "@/components/project-links";
 import { StackChip } from "@/components/stack-chip";
-import { getProject, getProjectBody, projectSlugs } from "@/lib/projects";
+import { getProject, getProjectBody, getProjects } from "@/lib/projects";
 
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-  return projectSlugs().map((slug) => ({ slug }));
+// Only entries with `page: true` get a page; any other slug 404s
+export async function generateStaticParams() {
+  return (await getProjects()).filter((p) => p.page).map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -31,7 +32,7 @@ export async function generateMetadata({
 export default async function ProjectPage({ params }: PageProps<"/work/[slug]">) {
   const { slug } = await params;
   const project = await getProject(slug).catch(() => null);
-  if (!project) notFound();
+  if (!project?.page) notFound();
   const Body = await getProjectBody(slug);
 
   return (

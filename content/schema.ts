@@ -27,6 +27,9 @@ export const projectMetaSchema = z.object({
     })
     .optional(),
   featured: z.boolean().optional(),
+  /* true gives the entry its own /work/<slug> page, built from the MDX body.
+     Off by default: the entry still shows in lists, just without a link. */
+  page: z.boolean().optional(),
 });
 
 export type ProjectMeta = z.infer<typeof projectMetaSchema>;

@@ -9,12 +9,16 @@ export function ProjectRow({ project }: { project: Project }) {
     <li className="grid gap-2 py-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-8">
       <div className="min-w-0">
         <h3 className="text-lg">
-          <Link
-            href={`/work/${project.slug}`}
-            className="transition-colors duration-150 hover:text-accent-text"
-          >
-            {project.title}
-          </Link>
+          {project.page ? (
+            <Link
+              href={`/work/${project.slug}`}
+              className="transition-colors duration-150 hover:text-accent-text"
+            >
+              {project.title}
+            </Link>
+          ) : (
+            project.title
+          )}
         </h3>
         <p className="mt-1 max-w-[68ch] text-ink-muted">{project.blurb}</p>
         <ul className="mt-3 flex flex-wrap gap-1.5">

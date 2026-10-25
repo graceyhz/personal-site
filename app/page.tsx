@@ -18,6 +18,24 @@ const cardStyles = [
   { tilt: "-rotate-[0.6deg]", tape: "bg-[#c4ddd9]", tapeAt: "left-[55%] rotate-[2deg]" },
 ];
 
+// Links to the entry's own page when it has one (`page: true`), else a plain block
+function EntryLink({
+  project,
+  className,
+  children,
+}: {
+  project: Project;
+  className: string;
+  children: React.ReactNode;
+}) {
+  if (!project.page) return <div className={className}>{children}</div>;
+  return (
+    <Link href={`/work/${project.slug}`} className={className}>
+      {children}
+    </Link>
+  );
+}
+
 function inGroup(projects: Project[], id: string) {
   const categories = groups.find((g) => g.id === id)?.categories ?? [];
   return projects.filter((p) => categories.includes(p.category));
@@ -71,7 +89,7 @@ export default async function Home() {
           href={`mailto:${site.email}`}
           className="mt-10 inline-flex min-h-12 items-center rounded-full bg-ink px-6 text-sm text-paper transition-colors duration-150 hover:bg-accent-text"
         >
-          let's chat!
+          let&apos;s chat!
         </a>
       </section>
 
@@ -87,15 +105,17 @@ export default async function Home() {
           <ul className="border-t-[1.5px] border-dashed border-ink">
             {experience.map((p) => (
               <li key={p.slug} className="border-b-[1.5px] border-dashed border-ink">
-                <Link
-                  href={`/work/${p.slug}`}
+                <EntryLink
+                  project={p}
                   className="group flex flex-col gap-2 py-7 sm:flex-row sm:gap-8"
                 >
                   <span className="font-hand text-2xl leading-tight text-pen sm:w-48 sm:shrink-0">
                     {p.period}
                   </span>
                   <span className="flex min-w-0 flex-col gap-1.5">
-                    <span className="font-display text-lg font-medium transition-colors duration-150 group-hover:text-accent-text">
+                    <span
+                      className={`font-display text-lg font-medium ${p.page ? "transition-colors duration-150 group-hover:text-accent-text" : ""}`}
+                    >
                       {p.title}
                     </span>
                     {p.org && <span className="text-sm text-ink-muted">{p.org}</span>}
@@ -104,7 +124,7 @@ export default async function Home() {
                       {p.stack.join(" · ")}
                     </span>
                   </span>
-                </Link>
+                </EntryLink>
               </li>
             ))}
           </ul>
@@ -125,9 +145,9 @@ export default async function Home() {
               const s = cardStyles[i % cardStyles.length];
               return (
                 <li key={p.slug}>
-                  <Link
-                    href={`/work/${p.slug}`}
-                    className={`relative flex h-full flex-col gap-3 border-[1.5px] border-ink bg-paper px-6 pt-7 pb-6 shadow-[4px_4px_0_var(--ink)] transition-transform duration-150 hover:-translate-y-0.5 ${s.tilt}`}
+                  <EntryLink
+                    project={p}
+                    className={`relative flex h-full flex-col gap-3 border-[1.5px] border-ink bg-paper px-6 pt-7 pb-6 shadow-[4px_4px_0_var(--ink)] ${p.page ? "transition-transform duration-150 hover:-translate-y-0.5" : ""} ${s.tilt}`}
                   >
                     <span
                       aria-hidden="true"
@@ -139,7 +159,7 @@ export default async function Home() {
                     <span className="font-mono text-xs text-ink-muted">
                       {p.stack.join(" · ")}
                     </span>
-                  </Link>
+                  </EntryLink>
                 </li>
               );
             })}
