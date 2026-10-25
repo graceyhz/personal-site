@@ -46,8 +46,10 @@ export default async function Home() {
   const experience = inGroup(projects, "experience").slice(0, 3);
   const builds = inGroup(projects, "projects").slice(0, 3);
   // Two visual pieces and one dance photo, each linking to its gallery
+  const visual = getVisual();
+  const featuredVisual = visual.filter((p) => p.featured);
   const artTiles = [
-    ...getVisual()
+    ...(featuredVisual.length > 0 ? featuredVisual : visual)
       .slice(0, 2)
       .map((p) => ({ ...p, href: "/arts/visual" })),
     ...getPerformingPhotos()
@@ -64,7 +66,7 @@ export default async function Home() {
           hi! welcome to my digital sketchbook~
         </p>
         <h1 className="mt-6 max-w-[16ch] text-4xl leading-[1.05] tracking-tight sm:text-6xl">
-          I’m {site.name.split(" ")[0]}, a CS student at Penn who builds with{" "}
+          I’m {site.name.split(" ")[0]}, a CS student at Penn interested in{" "}
           <span className="relative inline-block px-2">
             AI/ML
             <svg
@@ -82,8 +84,8 @@ export default async function Home() {
                 vectorEffect="non-scaling-stroke"
               />
             </svg>
-          </span>{" "}
-          and draws &amp; dances on the side.
+          </span>
+          .
         </h1>
         <a
           href={`mailto:${site.email}`}

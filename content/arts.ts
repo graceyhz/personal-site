@@ -17,6 +17,8 @@ export const visualSchema = z.object({
   src: z.string().startsWith("/arts/"),
   /* Which section of /arts/visual it goes in */
   kind: z.enum(["drawing", "photography"]),
+  /* true puts the piece in the homepage arts row (up to two, in list order) */
+  featured: z.boolean().optional(),
 });
 
 export const performingSchema = z.object({
@@ -50,6 +52,7 @@ export const visual: VisualEntry[] = [
   },
   {
     title: "in love",
+    featured: true,
     medium: "Digital, Procreate",
     year: 2024,
     src: "/arts/drawing-portrait-red-curls.jpg",
@@ -82,6 +85,7 @@ export const visual: VisualEntry[] = [
   },
   {
     title: "honolulu sunset",
+    featured: true,
     medium: "Photography",
     year: 2025,
     src: "/arts/photo-honolulu-sunset.jpg",

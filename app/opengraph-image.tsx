@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 /* Link-preview card shown when the site is shared (LinkedIn, iMessage, Slack).
    Hex values mirror the palette tokens in globals.css. */
-export const alt = `${site.name}: CS at Penn, AI/ML, dance, drawing and photography`;
+export const alt = `${site.name}: CS student at Penn interested in AI/ML`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -41,7 +41,7 @@ export default function OpengraphImage() {
           ))}
         </svg>
         <div style={{ display: "flex", fontSize: 34, color: "#2340c9" }}>
-          hi! page 1 of my sketchbook —
+          hi! welcome to my digital sketchbook~
         </div>
         <div
           style={{
@@ -65,7 +65,7 @@ export default function OpengraphImage() {
           </svg>
         </div>
         <div style={{ display: "flex", fontSize: 40, marginTop: 36, color: "#4f5b68" }}>
-          CS @ Penn · AI/ML · dance, drawing & photography
+          CS student at Penn · interested in AI/ML
         </div>
         <div style={{ display: "flex", fontSize: 30, marginTop: 56, color: "#2b5a8c" }}>
           {site.url.replace("https://", "")}
