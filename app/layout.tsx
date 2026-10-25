@@ -57,7 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${poppins.variable} ${inter.variable} ${jetbrainsMono.variable} ${caveat.variable} h-full`}
     >
-      <body className="flex min-h-full flex-col bg-paper text-ink">
+      <body className="dot-paper flex min-h-full flex-col bg-paper text-ink">
         <Header />
         <main id="main" className="flex-1">
           {children}

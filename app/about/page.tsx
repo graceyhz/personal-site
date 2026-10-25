@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/container";
+import { PageHeader } from "@/components/page-header";
 
 export const metadata: Metadata = {
   title: "about",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <Container className="pt-24 sm:pt-32">
-      <h1 className="text-3xl lowercase sm:text-4xl">about</h1>
+      <PageHeader title="about" note="the longer story" />
     </Container>
   );
 }

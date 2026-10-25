@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/container";
+import { PageHeader } from "@/components/page-header";
 import { Publications } from "@/components/publications";
 import { WorkGroups } from "@/components/work-groups";
 import { getProjects } from "@/lib/projects";
@@ -15,8 +16,8 @@ export default async function WorkPage() {
 
   return (
     <Container className="pt-24 sm:pt-32">
-      <h1 className="text-3xl lowercase sm:text-4xl">work</h1>
-      <div className="mt-12">
+      <PageHeader title="work" note="research, jobs & side projects" />
+      <div className="mt-16">
         <Publications />
       </div>
       <WorkGroups projects={projects} />

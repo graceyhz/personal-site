@@ -44,7 +44,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           / {project.category}
         </p>
         <h1 className="mt-3 text-3xl sm:text-4xl">{project.title}</h1>
-        <p className="mt-3 font-mono text-xs text-ink-muted">
+        <p className="mt-3 font-hand text-2xl text-pen">
           {project.org ? `${project.org} · ` : ""}
           {project.period}
         </p>

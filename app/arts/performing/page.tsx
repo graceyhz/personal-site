@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/container";
 import { Gallery } from "@/components/gallery";
+import { PageHeader } from "@/components/page-header";
+import { SectionHeading } from "@/components/section-heading";
 import { VideoFacade } from "@/components/video-facade";
 import type { PerformingEntry } from "@/content/arts";
 import { getPerforming, getPerformingPhotos } from "@/lib/arts";
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
 
 const videoSections = [
   { kind: "choreography", heading: "check out some of my choreography!" },
-  { kind: "danced", heading: "check out some of the dances i’ve danced in!" },
+  { kind: "danced", heading: "check out some of the dances i’ve performed in!" },
 ] as const;
 
 function Video({ p }: { p: PerformingEntry }) {
@@ -43,16 +45,14 @@ export default function PerformingArtsPage() {
   const photos = getPerformingPhotos();
   return (
     <Container className="pt-24 sm:pt-32">
-      <h1 className="text-3xl lowercase sm:text-4xl">performing</h1>
+      <PageHeader title="performing" note="a variety of dance styles!" />
       {videoSections.map(({ kind, heading }) => {
         const videos = pieces.filter((p) => p.kind === kind);
         if (videos.length === 0) return null;
         return (
           <section key={kind} className="mt-16" aria-labelledby={`videos-${kind}`}>
-            <h2 id={`videos-${kind}`} className="border-b border-border pb-3 text-xl">
-              {heading}
-            </h2>
-            <ul className="mt-8 grid gap-12 md:grid-cols-2">
+            <SectionHeading id={`videos-${kind}`} title={heading} />
+            <ul className="grid gap-12 md:grid-cols-2">
               {videos.map((p) => (
                 <Video key={p.youtubeId} p={p} />
               ))}
@@ -62,12 +62,8 @@ export default function PerformingArtsPage() {
       })}
       {photos.length > 0 && (
         <section className="mt-20" aria-labelledby="photos">
-          <h2 id="photos" className="border-b border-border pb-3 text-xl">
-            photos from the stage
-          </h2>
-          <div className="mt-8">
-            <Gallery pieces={photos} columns="columns-2 md:columns-3 lg:columns-4" />
-          </div>
+          <SectionHeading id="photos" title="photos from the stage" />
+          <Gallery pieces={photos} columns="columns-2 md:columns-3 lg:columns-4" />
         </section>
       )}
     </Container>

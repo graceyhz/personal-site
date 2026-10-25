@@ -1,13 +1,12 @@
+import { SectionHeading } from "@/components/section-heading";
 import { publications } from "@/content/publications";
 
 /* FR-08 / §6.3: real citations, one click to the paper. */
 export function Publications() {
   return (
     <section aria-labelledby="publications">
-      <h2 id="publications" className="border-b border-border pb-3 text-xl lowercase">
-        publications
-      </h2>
-      <ol className="divide-y divide-border">
+      <SectionHeading id="publications" title="publications" note="" />
+      <ol className="divide-y divide-border border-t border-border">
         {publications.map((p) => (
           <li key={p.doi} className="py-5">
             <p className="max-w-[68ch]">

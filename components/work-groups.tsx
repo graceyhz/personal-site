@@ -1,4 +1,5 @@
 import { ProjectRow } from "@/components/project-row";
+import { SectionHeading } from "@/components/section-heading";
 import type { Project } from "@/content/schema";
 import { groups } from "@/lib/categories";
 
@@ -6,15 +7,13 @@ import { groups } from "@/lib/categories";
 export function WorkGroups({ projects }: { projects: Project[] }) {
   return (
     <>
-      {groups.map(({ id, label, categories }) => {
+      {groups.map(({ id, label, note, categories }) => {
         const group = projects.filter((p) => categories.includes(p.category));
         if (group.length === 0) return null;
         return (
-          <section key={id} id={id} className="mt-16 scroll-mt-8" aria-labelledby={`group-${id}`}>
-            <h2 id={`group-${id}`} className="border-b border-border pb-3 text-xl lowercase">
-              {label}
-            </h2>
-            <ul className="divide-y divide-border">
+          <section key={id} id={id} className="mt-20 scroll-mt-8" aria-labelledby={`group-${id}`}>
+            <SectionHeading id={`group-${id}`} title={label} note={note} />
+            <ul className="divide-y divide-border border-t border-border">
               {group.map((p) => (
                 <ProjectRow key={p.slug} project={p} />
               ))}

@@ -54,7 +54,7 @@ export function Gallery({
                 className="h-auto w-full"
               />
             </button>
-            <p className="mt-2 font-mono text-xs text-ink-muted">
+            <p className="mt-1 font-hand text-xl text-pen">
               {p.title}
               {p.year ? ` · ${p.year}` : ""}
             </p>

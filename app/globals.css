@@ -3,16 +3,16 @@
 /* §8.3 palette — every color is a token on :root so a future dark mode
    redefines these under [data-theme="dark"] without touching components. */
 :root {
-  --ink: #1f1b17;
-  --ink-muted: #6b6259;
-  --paper: #faf7f2;
-  --surface: #f2ede5;
-  --border: #e3dad0;
-  --accent: #c2542f;
-  --accent-text: #a8431f;
+  --ink: #1b2533;
+  --ink-muted: #4f5b68;
+  --paper: #edf3f9;
+  --surface: #cfdbe5;
+  --border: #b9c8d5;
+  --accent: #3b6ea8;
+  --accent-text: #2b5a8c;
   --support: #2f5d50;
   --pen: #2340c9;
-  --dot: #ddd5ca;
+  --dot: #b9c8d5;
 }
 
 @theme inline {
@@ -74,7 +74,7 @@ h3 {
   background: var(--surface);
 }
 
-/* Sketchbook homepage: dot-grid paper */
+/* Sketchbook: dot-grid paper behind every page */
 .dot-paper {
   background-image: radial-gradient(var(--dot) 1px, transparent 1px);
   background-size: 24px 24px;

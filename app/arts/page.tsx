@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/container";
+import { PageHeader } from "@/components/page-header";
 
 export const metadata: Metadata = {
   title: "arts",
@@ -9,14 +10,14 @@ export const metadata: Metadata = {
 };
 
 const sections = [
-  { href: "/arts/visual", label: "visual", blurb: "Drawings and digital work." },
+  { href: "/arts/visual", label: "visual", blurb: "Drawing, illustration & photography." },
   { href: "/arts/performing", label: "performing", blurb: "Dance, in photos and on video." },
 ] as const;
 
 export default function ArtsPage() {
   return (
     <Container className="pt-24 sm:pt-32">
-      <h1 className="text-3xl lowercase sm:text-4xl">arts</h1>
+      <PageHeader title="arts" note="ink, pixels & movement" />
       <ul className="mt-12 divide-y divide-border border-y border-border">
         {sections.map(({ href, label, blurb }) => (
           <li key={href}>
