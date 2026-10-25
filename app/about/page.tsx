@@ -18,6 +18,13 @@ const currently = [
   { label: "dancing & drawing", value: "since age 5" },
 ];
 
+// Second handwritten card: ways to reach me
+const contact = [
+  { label: "email", href: `mailto:${site.email}`, text: site.email },
+  { label: "linkedin", href: site.linkedin, text: "linkedin.com/in/graceyhz" },
+  { label: "github", href: site.github, text: "github.com/graceyhz" },
+];
+
 function InlineLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <Link
@@ -77,24 +84,53 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <aside
-          aria-label="Currently"
-          className="relative flex-[1_1_260px] rotate-1 border-[1.5px] border-ink bg-paper px-6 pt-8 pb-6 shadow-[4px_4px_0_var(--ink)]"
-        >
-          <span
-            aria-hidden="true"
-            className="absolute -top-3 left-[35%] h-6 w-20 rotate-[3deg] bg-[#d3d1ef] opacity-90"
-          />
-          <p className="font-hand text-3xl text-pen">currently…</p>
-          <dl className="mt-4 space-y-3">
-            {currently.map(({ label, value }) => (
-              <div key={label}>
-                <dt className="font-mono text-xs lowercase text-ink-muted">{label}</dt>
-                <dd className="font-hand text-2xl leading-tight">{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </aside>
+        <div className="flex flex-[1_1_260px] flex-col gap-12">
+          <aside
+            aria-label="Currently"
+            className="relative rotate-1 border-[1.5px] border-ink bg-paper px-6 pt-8 pb-6 shadow-[4px_4px_0_var(--ink)]"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute -top-3 left-[35%] h-6 w-20 rotate-[3deg] bg-[#d3d1ef] opacity-90"
+            />
+            <p className="font-hand text-3xl text-pen">currently…</p>
+            <dl className="mt-4 space-y-3">
+              {currently.map(({ label, value }) => (
+                <div key={label}>
+                  <dt className="font-mono text-xs lowercase text-ink-muted">{label}</dt>
+                  <dd className="font-hand text-2xl leading-tight">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+
+          <aside
+            aria-label="Contact"
+            className="relative -rotate-[0.8deg] border-[1.5px] border-ink bg-paper px-6 pt-8 pb-6 shadow-[4px_4px_0_var(--ink)]"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute -top-3 left-[20%] h-6 w-20 -rotate-[4deg] bg-[#bfd3e8] opacity-90"
+            />
+            <p className="font-hand text-3xl text-pen">contact</p>
+            <dl className="mt-4 space-y-3">
+              {contact.map(({ label, href, text }) => (
+                <div key={label}>
+                  <dt className="font-mono text-xs lowercase text-ink-muted">{label}</dt>
+                  <dd className="font-hand text-2xl leading-tight break-words">
+                    <a
+                      href={href}
+                      className="underline decoration-1 underline-offset-4 transition-colors duration-150 hover:text-accent-text"
+                      {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    >
+                      {text}
+                    </a>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+        </div>
       </div>
     </Container>
   );
